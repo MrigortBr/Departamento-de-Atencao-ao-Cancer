@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cartilha de Diretrizes para Uso de IA — Departamento de Atenção ao Câncer</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: "Source Sans 3", sans-serif;
+                background: #f5f5f3;
+                color: #1a1a1a;
+                padding: 2rem 1rem;
+            }
+            .cartilha {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+            .capa {
+                background: #0f6e56;
+                border-radius: 16px;
+                padding: 2.5rem 2rem 2rem;
+                margin-bottom: 1.5rem;
+                position: relative;
+                overflow: hidden;
+            }
+            .capa::before {
+                content: "";
+                position: absolute;
+                right: -30px;
+                top: -30px;
+                width: 160px;
+                height: 160px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.06);
+            }
+            .capa::after {
+                content: "";
+                position: absolute;
+                right: 40px;
+                bottom: -20px;
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.04);
+            }
+            .capa-tag {
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                color: #9fe1cb;
+                text-transform: uppercase;
+                margin-bottom: 0.75rem;
+            }
+            .capa-title {
+                font-family: "Playfair Display", serif;
+                font-size: 26px;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1.3;
+                margin-bottom: 0.5rem;
+            }
+            .capa-sub {
+                font-size: 14px;
+                color: #9fe1cb;
+                margin-bottom: 1.5rem;
+                line-height: 1.5;
+            }
+            .capa-badges {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .badge {
+                font-size: 11px;
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-weight: 500;
+                background: rgba(255, 255, 255, 0.12);
+                color: #e1f5ee;
+                border: 0.5px solid rgba(255, 255, 255, 0.2);
+            }
+            .section-label {
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 1.5px;
+                color: #666;
+                text-transform: uppercase;
+                margin: 2rem 0 0.75rem;
+            }
+            .intro-card {
+                background: #f0f0ee;
+                border-radius: 12px;
+                padding: 1.25rem;
+                margin-bottom: 1rem;
+                border-left: 3px solid #0f6e56;
+            }
+            .intro-card p {
+                font-size: 14px;
+                line-height: 1.7;
+                color: #1a1a1a;
+            }
+            .principios-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 10px;
+                margin-bottom: 1rem;
+            }
+            .principio-card {
+                background: #fff;
+                border: 0.5px solid #ddd;
+                border-radius: 12px;
+                padding: 1rem;
+            }
+            .principio-icon {
+                font-size: 20px;
+                margin-bottom: 8px;
+                color: #0f6e56;
+            }
+            .principio-title {
+                font-size: 13px;
+                font-weight: 600;
+                color: #1a1a1a;
+                margin-bottom: 4px;
+            }
+            .principio-desc {
+                font-size: 12px;
+                color: #555;
+                line-height: 1.5;
+            }
+            .fonte-tag {
+                font-size: 10px;
+                color: #888;
+                font-style: italic;
+                margin-top: 6px;
+            }
+            .diretriz-block {
+                border: 0.5px solid #ddd;
+                border-radius: 12px;
+                overflow: hidden;
+                margin-bottom: 10px;
+            }
+            .diretriz-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 0.85rem 1rem;
+                background: #f5f5f3;
+                cursor: pointer;
+                user-select: none;
+            }
+            .diretriz-header:hover {
+                background: #ebebea;
+            }
+            .diretriz-num {
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                background: #0f6e56;
+                color: #fff;
+                font-size: 12px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+            .diretriz-label {
+                font-size: 14px;
+                font-weight: 500;
+                color: #1a1a1a;
+                flex: 1;
+            }
+            .diretriz-body {
+                padding: 1rem;
+                font-size: 13px;
+                color: #1a1a1a;
+                line-height: 1.7;
+                display: none;
+                background: #fff;
+            }
+            .diretriz-body.open {
+                display: block;
+            }
+            .diretriz-body p {
+                margin-bottom: 0.5rem;
+            }
+            .diretriz-body ul {
+                margin: 0.5rem 0 0;
+                padding-left: 1.2rem;
+            }
+            .diretriz-body li {
+                margin-bottom: 5px;
+            }
+            .ref-pill {
+                display: inline-block;
+                font-size: 10px;
+                padding: 2px 7px;
+                border-radius: 20px;
+                margin-right: 4px;
+                margin-top: 6px;
+                font-weight: 500;
+            }
+            .ref-who {
+                background: #e1f5ee;
+                color: #085041;
+            }
+            .ref-ebia {
+                background: #e6f1fb;
+                color: #0c447c;
+            }
+            .ref-lgpd {
+                background: #faeeda;
+                color: #633806;
+            }
+            .ref-mgi {
+                background: #eeedfe;
+                color: #3c3489;
+            }
+            .ref-ocde {
+                background: #fcebeb;
+                color: #791f1f;
+            }
+            .chevron {
+                transition: transform 0.2s;
+                flex-shrink: 0;
+            }
+            .chevron.open {
+                transform: rotate(180deg);
+            }
+            .vedacoes-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 10px;
+                margin-bottom: 1rem;
+            }
+            .vedacao-item {
+                background: #fcebeb;
+                border-radius: 8px;
+                padding: 0.85rem;
+                border-left: 3px solid #a32d2d;
+            }
+            .vedacao-title {
+                font-size: 13px;
+                font-weight: 600;
+                color: #501313;
+                margin-bottom: 3px;
+            }
+            .vedacao-desc {
+                font-size: 12px;
+                color: #791f1f;
+                line-height: 1.4;
+            }
+            .checklist-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 8px 0;
+                border-bottom: 0.5px solid #e0e0e0;
+            }
+            .checklist-item:last-child {
+                border-bottom: none;
+            }
+            .check-circle {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                border: 1.5px solid #0f6e56;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                margin-top: 1px;
+                background: #fff;
+            }
+            .check-text {
+                font-size: 13px;
+                color: #1a1a1a;
+                line-height: 1.5;
+            }
+            .checklist-wrap {
+                background: #fff;
+                border: 0.5px solid #ddd;
+                border-radius: 12px;
+                padding: 1rem 1.25rem;
+                margin-bottom: 1rem;
+            }
+            .footer-ref {
+                background: #f5f5f3;
+                border-radius: 12px;
+                padding: 1rem;
+                font-size: 12px;
+                color: #555;
+                line-height: 1.8;
+            }
+            .footer-ref strong {
+                color: #1a1a1a;
+                font-weight: 600;
+            }
+            .rodape {
+                font-size: 11px;
+                color: #999;
+                text-align: center;
+                margin-top: 1rem;
+                padding-bottom: 2rem;
+            }
+            @media print {
+                body {
+                    background: #fff;
+                    padding: 0;
+                }
+                .diretriz-body {
+                    display: block !important;
+                }
+                .chevron {
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="cartilha">
+            <div class="capa">
+                <div class="capa-tag">Departamento de Atenção ao Câncer</div>
+                <div class="capa-title">Cartilha de Diretrizes para o Uso de Inteligência Artificial</div>
+                <div class="capa-sub">Orientações para uso ético, seguro e responsável de IA<br />no contexto da saúde oncológica — 2026</div>
+                <div class="capa-badges">
+                    <span class="badge">OMS 2024</span>
+                    <span class="badge">EBIA / PBIA 2024</span>
+                    <span class="badge">LGPD</span>
+                    <span class="badge">Portaria MGI 3.485/2026</span>
+                    <span class="badge">OCDE</span>
+                </div>
+            </div>
+
+            <p class="section-label">Por que esta cartilha?</p>
+            <div class="intro-card">
+                <p>
+                    A inteligência artificial apresenta potencial significativo para apoiar o cuidado oncológico — do diagnóstico precoce à análise de
+                    dados epidemiológicos. No entanto, seu uso exige responsabilidade, supervisão humana e alinhamento às normas vigentes. Esta
+                    cartilha consolida diretrizes nacionais e internacionais aplicadas à realidade do Departamento de Atenção ao Câncer.
+                </p>
+            </div>
+
+            <p class="section-label">Princípios fundamentais</p>
+            <div class="principios-grid">
+                <div class="principio-card">
+                    <div class="principio-icon">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#0F6E56"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
+                            <path d="M15 19l2 2l4 -4" />
+                        </svg>
+                    </div>
+                    <div class="principio-title">Supervisão humana</div>
+                    <div class="principio-desc">
+                        A IA apoia decisões, mas não as substitui. Profissionais de saúde retêm a responsabilidade final.
+                    </div>
+                    <div class="fonte-tag">OMS · MGI 3.485/2026</div>
+                </div>
+                <div class="principio-card">
+                    <div class="principio-icon">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#0F6E56"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                            <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                        </svg>
+                    </div>
+                    <div class="principio-title">Transparência</div>
+                    <div class="principio-desc">
+                        O uso de IA deve ser identificado e explicável, especialmente em documentos e análises institucionais.
+                    </div>
+                    <div class="fonte-tag">EBIA · OCDE</div>
+                </div>
+                <div class="principio-card">
+                    <div class="principio-icon">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#0F6E56"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+                            <circle cx="12" cy="11" r="1" />
+                            <path d="M12 12v3" />
+                        </svg>
+                    </div>
+                    <div class="principio-title">Proteção de dados</div>
+                    <div class="principio-desc">
+                        Dados sensíveis de pacientes são protegidos pela LGPD. Jamais insira dados pessoais em ferramentas externas.
+                    </div>
+                    <div class="fonte-tag">LGPD · OMS 2024</div>
+                </div>
+                <div class="principio-card">
+                    <div class="principio-icon">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#0F6E56"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M7 20l10 0" />
+                            <path d="M12 4l0 16" />
+                            <path d="M4 6l16 0" />
+                            <path d="M4 6l4 6c0 0 -1 2 -4 2s-4 -2 -4 -2l4 -6" />
+                            <path d="M20 6l4 6c0 0 -1 2 -4 2s-4 -2 -4 -2l4 -6" />
+                        </svg>
+                    </div>
+                    <div class="principio-title">Equidade</div>
+                    <div class="principio-desc">Monitorar vieses que possam ampliar desigualdades no acesso ao cuidado oncológico.</div>
+                    <div class="fonte-tag">EBIA · OMS · OCDE</div>
+                </div>
+                <div class="principio-card">
+                    <div class="principio-icon">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#0F6E56"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M15 15m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M13 17.5v4.5l2 -1.5l2 1.5v-4.5" />
+                            <path d="M10 19h-5a2 2 0 0 1 -2 -2v-10c0 -1.1 .9 -2 2 -2h14a2 2 0 0 1 2 2v3.5" />
+                            <path d="M7 9h10" />
+                            <path d="M7 12h5" />
+                        </svg>
+                    </div>
+                    <div class="principio-title">Responsabilização</div>
+                    <div class="principio-desc">
+                        Servidores são responsáveis pelas informações inseridas em sistemas de IA e por seu uso adequado.
+                    </div>
+                    <div class="fonte-tag">Portaria MGI 3.485/2026</div>
+                </div>
+                <div class="principio-card">
+                    <div class="principio-icon">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#0F6E56"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+                            <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+                        </svg>
+                    </div>
+                    <div class="principio-title">Avaliação contínua</div>
+                    <div class="principio-desc">O uso de IA deve ser revisado periodicamente quanto a riscos, impactos e efetividade.</div>
+                    <div class="fonte-tag">OMS 2024 · OCDE</div>
+                </div>
+            </div>
+
+            <p class="section-label">
+                Diretrizes por área de uso <span style="font-size: 11px; font-weight: 400; color: #888">(clique para expandir)</span>
+            </p>
+
+            <div class="diretriz-block" onclick="toggle(this)">
+                <div class="diretriz-header">
+                    <div class="diretriz-num">1</div>
+                    <span class="diretriz-label">Uso em atividades administrativas</span>
+                    <svg
+                        class="chevron"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#888"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="diretriz-body">
+                    <p>
+                        Ferramentas de IA podem ser utilizadas para redigir documentos, minutas, resumos e suporte à tomada de decisão administrativa.
+                    </p>
+                    <ul>
+                        <li>Revise e valide todo conteúdo gerado antes de finalizar ou assinar documentos oficiais.</li>
+                        <li>Identifique, no documento, quando um rascunho foi elaborado com auxílio de IA.</li>
+                        <li>Não insira informações classificadas, sigilosas ou dados pessoais de pacientes em ferramentas de IA externas.</li>
+                        <li>Utilize preferencialmente ferramentas homologadas institucionalmente ou aprovadas pelo gestor de TI.</li>
+                    </ul>
+                    <div>
+                        <span class="ref-pill ref-mgi">Portaria MGI 3.485/2026</span>
+                        <span class="ref-pill ref-ebia">EBIA</span>
+                        <span class="ref-pill ref-lgpd">LGPD</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diretriz-block" onclick="toggle(this)">
+                <div class="diretriz-header">
+                    <div class="diretriz-num">2</div>
+                    <span class="diretriz-label">Uso em análise de dados (dados abertos)</span>
+                    <svg
+                        class="chevron"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#888"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="diretriz-body">
+                    <p>
+                        A análise de bases públicas (DATASUS, INCA, OpenDataSUS, etc.) com apoio de IA é permitida e encorajada para fins
+                        epidemiológicos e de planejamento em oncologia.
+                    </p>
+                    <ul>
+                        <li>Confirme que os dados utilizados são de fato públicos e abertos antes de processá-los com IA.</li>
+                        <li>Documente a metodologia, os modelos e as ferramentas de IA utilizados nas análises.</li>
+                        <li>Verifique os resultados gerados — modelos de linguagem podem produzir interpretações imprecisas de dados numéricos.</li>
+                        <li>Resultados que embasem políticas públicas ou relatórios técnicos devem passar por revisão especializada.</li>
+                        <li>Atenção a vieses de dados: bases históricas de câncer podem sub-representar grupos vulneráveis.</li>
+                    </ul>
+                    <div>
+                        <span class="ref-pill ref-who">OMS 2024</span>
+                        <span class="ref-pill ref-ocde">OCDE</span>
+                        <span class="ref-pill ref-ebia">EBIA / PBIA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diretriz-block" onclick="toggle(this)">
+                <div class="diretriz-header">
+                    <div class="diretriz-num">3</div>
+                    <span class="diretriz-label">Uso em comunicação e atendimento ao cidadão</span>
+                    <svg
+                        class="chevron"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#888"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="diretriz-body">
+                    <p>O uso de IA na elaboração de comunicados, orientações e materiais para pacientes oncológicos exige atenção redobrada.</p>
+                    <ul>
+                        <li>Toda informação clínica gerada por IA deve ser revisada por profissional habilitado antes da publicação.</li>
+                        <li>Jamais utilize IA para comunicar diagnósticos, prognósticos ou orientações terapêuticas individuais.</li>
+                        <li>Materiais educativos podem ser elaborados com IA, desde que validados pela equipe técnica.</li>
+                        <li>Sinalize ao público, quando pertinente, que o material foi produzido ou revisado com auxílio de IA.</li>
+                    </ul>
+                    <div>
+                        <span class="ref-pill ref-who">OMS 2024</span>
+                        <span class="ref-pill ref-mgi">MGI 3.485/2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="diretriz-block" onclick="toggle(this)">
+                <div class="diretriz-header">
+                    <div class="diretriz-num">4</div>
+                    <span class="diretriz-label">Gestão de riscos e governança</span>
+                    <svg
+                        class="chevron"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#888"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+                <div class="diretriz-body">
+                    <p>O uso institucional de IA deve ser acompanhado de mecanismos de supervisão e controle.</p>
+                    <ul>
+                        <li>Mapeie os sistemas de IA em uso ou em avaliação no departamento e mantenha registro atualizado.</li>
+                        <li>Avalie riscos antes da adoção de novas ferramentas — impacto sobre dados, decisões e direitos.</li>
+                        <li>Reporte falhas, resultados inesperados ou usos inadequados ao gestor de TI e à segurança da informação.</li>
+                        <li>
+                            A supervisão humana deve ser proporcional ao risco: quanto maior o impacto sobre direitos ou saúde, mais rigorosa a
+                            revisão.
+                        </li>
+                    </ul>
+                    <div style="margin-top: 1rem; padding: 0.85rem; background: #e8f4f0; border-radius: 8px; border-left: 3px solid #0f6e56">
+                        <p style="font-size: 12px; font-weight: 600; color: #085041; margin-bottom: 6px">Procedimento formal de avaliação de risco</p>
+                        <p style="font-size: 12px; color: #1a1a1a; margin-bottom: 8px">
+                            Antes de adotar qualquer ferramenta de IA, o servidor deve verificar obrigatoriamente:
+                        </p>
+                        <ul style="font-size: 12px; color: #1a1a1a; padding-left: 1.2rem; margin-bottom: 8px">
+                            <li>Se há tratamento de dados pessoais — e se está em conformidade com a LGPD;</li>
+                            <li>Se os dados utilizados são abertos, anonimizados ou autorizados;</li>
+                            <li>Qual o nível de impacto potencial sobre direitos, saúde ou decisões institucionais;</li>
+                            <li>Se a ferramenta foi homologada pelo gestor de TI ou pelo encarregado de dados (DPO);</li>
+                            <li>Se há necessidade de supervisão humana reforçada dado o grau de risco identificado.</li>
+                        </ul>
+                        <p style="font-size: 12px; color: #555">
+                            Documento de referência:
+                            <a href="_______________" style="color: #0f6e56; font-weight: 600"
+                                >Cartilha de Diretrizes para o Uso de IA — Departamento de Atenção ao Câncer (2026)</a
+                            >
+                        </p>
+                    </div>
+                    <div style="margin-top: 0.75rem">
+                        <span class="ref-pill ref-mgi">Portaria MGI 3.485/2026</span>
+                        <span class="ref-pill ref-ocde">OCDE</span>
+                        <span class="ref-pill ref-ebia">EBIA</span>
+                        <span class="ref-pill ref-lgpd">LGPD</span>
+                    </div>
+                </div>
+            </div>
+
+            <p class="section-label">O que não é permitido</p>
+            <div class="vedacoes-grid">
+                <div class="vedacao-item">
+                    <div class="vedacao-title">
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            style="vertical-align: -2px; margin-right: 4px"
+                        >
+                            <circle cx="12" cy="12" r="9" />
+                            <line x1="9" y1="9" x2="15" y2="15" />
+                        </svg>
+                        Dados de pacientes em IA externa
+                    </div>
+                    <div class="vedacao-desc">
+                        Inserir prontuários, CPFs, dados clínicos ou qualquer informação pessoal identificável em ferramentas de IA não homologadas.
+                    </div>
+                </div>
+                <div class="vedacao-item">
+                    <div class="vedacao-title">
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            style="vertical-align: -2px; margin-right: 4px"
+                        >
+                            <circle cx="12" cy="12" r="9" />
+                            <line x1="9" y1="9" x2="15" y2="15" />
+                        </svg>
+                        Decisão clínica automatizada
+                    </div>
+                    <div class="vedacao-desc">
+                        Utilizar IA como único critério para decisões de diagnóstico, tratamento ou triagem oncológica sem supervisão profissional.
+                    </div>
+                </div>
+                <div class="vedacao-item">
+                    <div class="vedacao-title">
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            style="vertical-align: -2px; margin-right: 4px"
+                        >
+                            <circle cx="12" cy="12" r="9" />
+                            <line x1="9" y1="9" x2="15" y2="15" />
+                        </svg>
+                        Informações sigilosas
+                    </div>
+                    <div class="vedacao-desc">
+                        Inserir documentos classificados, estratégicos ou de gestão interna confidencial em sistemas de IA externos.
+                    </div>
+                </div>
+                <div class="vedacao-item">
+                    <div class="vedacao-title">
+                        <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.75"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            style="vertical-align: -2px; margin-right: 4px"
+                        >
+                            <circle cx="12" cy="12" r="9" />
+                            <line x1="9" y1="9" x2="15" y2="15" />
+                        </svg>
+                        Publicação sem revisão
+                    </div>
+                    <div class="vedacao-desc">
+                        Publicar análises, relatórios técnicos ou comunicados gerados por IA sem validação de um servidor responsável.
+                    </div>
+                </div>
+            </div>
+
+            <p class="section-label">Antes de usar IA: checklist rápido</p>
+            <div class="checklist-wrap">
+                <div class="checklist-item">
+                    <div class="check-circle">
+                        <svg
+                            width="11"
+                            height="11"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#0F6E56"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <span class="check-text">Os dados que vou usar são abertos ou anonimizados? Se não, não insira na ferramenta.</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="check-circle"></div>
+                    <span class="check-text">A ferramenta de IA foi aprovada pela instituição ou pelo gestor de TI?</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="check-circle"></div>
+                    <span class="check-text">Vou revisar criticamente o resultado gerado antes de usar?</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="check-circle"></div>
+                    <span class="check-text">O produto final (documento, análise) será assinado por um servidor responsável?</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="check-circle"></div>
+                    <span class="check-text">Vou identificar, quando necessário, que o material foi gerado com auxílio de IA?</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="check-circle"></div>
+                    <span class="check-text">O uso não envolve decisão clínica direta sobre pacientes?</span>
+                </div>
+            </div>
+
+            <p class="section-label">Embasamento normativo</p>
+            <div class="footer-ref">
+                <strong>Brasil:</strong> Estratégia Brasileira de IA – EBIA (Portaria MCTI nº 4.617/2021); Plano Brasileiro de IA – PBIA 2024–2028;
+                Portaria MGI nº 3.485/2026 (Política de Governança de IA); Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/2018); Decreto nº
+                12.572/2025 (governo digital).<br /><br />
+                <strong>Internacional:</strong> OMS – Ethics and Governance of AI for Health (2021) e Guidance on Large Multimodal Models
+                (janeiro/2024); Recomendação do Conselho da OCDE sobre Inteligência Artificial (2019, revisada 2024); Orientações Éticas para IA de
+                Confiança – Comissão Europeia (2019).<br /><br />
+                <strong>Referência setorial:</strong> ASCO/ASCP – Framework for AI in Oncology; TCU – Guia de Uso de IA Generativa na Administração
+                Pública (2024).
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-left">© 2026 Departamento de Atenção ao Câncer</div>
+
+            <div class="footer-right">
+                <div class="image-wrapper">
+                    <img src="./especialistas.png" alt="Agora tem especialistas" />
+                </div>
+
+                <div class="image-wrapper">
+                    <img src="./ministerio.png" alt="Ministerio da saude" />
+                </div>
+
+                <div class="image-wrapper">
+                    <img src="./gov.jpeg" alt="Governo Federal" />
+                </div>
+            </div>
+        </footer>
+
+        <style>
+            .footer {
+                width: 100%;
+                padding: 0 24px;
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                background: #ffffff;
+
+                font-size: 12px;
+                color: #14532d;
+
+                border-top: 1px solid #d1fae5;
+            }
+
+            .footer-left {
+                font-weight: 500;
+            }
+
+            .footer-right {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .image-wrapper {
+                position: relative;
+
+                height: 9vh;
+                aspect-ratio: 3 / 1;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .image-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+            /* Responsivo */
+            @media (max-width: 768px) {
+                .footer {
+                    width: 100dvw;
+                    height: auto;
+
+                    flex-direction: column;
+
+                    justify-content: center;
+                    align-items: flex-start;
+
+                    gap: 8px;
+
+                    padding: 16px 24px;
+                }
+
+                .footer-left {
+                    width: 100%;
+                    text-align: center;
+                }
+
+                .footer-right {
+                    width: 100%;
+                    margin: auto;
+
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+
+                .image-wrapper {
+                    width: 30dvw;
+                    height: auto;
+
+                    max-height: 9dvh;
+                }
+            }
+        </style>
+        <script>
+            function toggle(block) {
+                var body = block.querySelector(".diretriz-body");
+                var chev = block.querySelector(".chevron");
+                var isOpen = body.classList.contains("open");
+                body.classList.toggle("open", !isOpen);
+                chev.classList.toggle("open", !isOpen);
+            }
+        </script>
+    </body>
+</html>
