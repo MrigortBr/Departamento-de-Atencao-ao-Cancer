@@ -1,0 +1,23 @@
+{
+    "name": "pr",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "node ./src/index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MrigortBr/Departamento-de-Atencao-ao-Cancer.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/MrigortBr/Departamento-de-Atencao-ao-Cancer/issues"
+    },
+    "homepage": "https://github.com/MrigortBr/Departamento-de-Atencao-ao-Cancer#readme",
+    "description": "",
+    "dependencies": {
+        "express": "^5.2.1"
+    }
+}
