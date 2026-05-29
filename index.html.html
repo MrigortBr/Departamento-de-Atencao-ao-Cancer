@@ -268,6 +268,9 @@
                 padding: 8px 0;
                 border-bottom: 0.5px solid #e0e0e0;
             }
+            .checklist-item:hover {
+                cursor: pointer;
+            }
             .checklist-item:last-child {
                 border-bottom: none;
             }
@@ -795,15 +798,84 @@
 
             <p class="section-label">Embasamento normativo</p>
             <div class="footer-ref">
-                <strong>Brasil:</strong> Estratégia Brasileira de IA – EBIA (Portaria MCTI nº 4.617/2021); Plano Brasileiro de IA – PBIA 2024–2028;
-                Portaria MGI nº 3.485/2026 (Política de Governança de IA); Lei Geral de Proteção de Dados – LGPD (Lei nº 13.709/2018); Decreto nº
-                12.572/2025 (governo digital).<br /><br />
-                <strong>Internacional:</strong> OMS – Ethics and Governance of AI for Health (2021) e Guidance on Large Multimodal Models
-                (janeiro/2024); Recomendação do Conselho da OCDE sobre Inteligência Artificial (2019, revisada 2024); Orientações Éticas para IA de
-                Confiança – Comissão Europeia (2019).<br /><br />
-                <strong>Referência setorial:</strong> ASCO/ASCP – Framework for AI in Oncology; TCU – Guia de Uso de IA Generativa na Administração
-                Pública (2024).
+                <strong>Brasil:</strong>
+                <a
+                    target="_blank"
+                    href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/transformacaodigital/estrategia-brasileira-de-inteligencia-artificial"
+                    >EBIA — Estratégia Brasileira de IA (Portaria MCTI nº 4.617/2021)</a
+                >
+
+                <a
+                    target="_blank"
+                    href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/transformacaodigital/arquivosinteligenciaartificial/ebia-diagramacao_4-979_2021.pdf"
+                >
+                    EBIA — documento PDF completo
+                </a>
+
+                <a
+                    target="_blank"
+                    href="https://www.gov.br/mcti/pt-br/acompanhe-o-mcti/noticias/2024/07/plano-brasileiro-de-ia-tera-supercomputador-e-investimento-de-r-23-bilhoes-em-quatro-anos/ia_para_o_bem_de_todos.pdf/view"
+                >
+                    PBIA 2024–2028 — Plano Brasileiro de IA (PDF)
+                </a>
+
+                <a
+                    target="_blank"
+                    href="https://bibliotecadigital.gestao.gov.br/bitstream/123456789/534492/1/PORTARIA%20MGI%20N%C2%BA%203.485,%20DE%2024%20DE%20ABRIL%20DE%202026%20-%20PORTARIA%20MGI%20N%C2%BA%203.485,%20DE%2024%20DE%20ABRIL%20DE%202026%20-%20DOU%20-%20Imprensa%20Nacional.pdf"
+                >
+                    Portaria MGI nº 3.485/2026
+                </a>
+                <a target="_blank" href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm">LGPD — Lei nº 13.709/2018 </a>
+
+                <a target="_blank" href="https://www.planalto.gov.br/ccivil_03/_Ato2023-2026/2025/Decreto/D12572.htm">Decreto nº 12.572/2025 </a>
+
+                <br /><br />
+
+                <strong>Internacional:</strong>
+
+                <a target="_blank" href="https://iris.who.int/bitstream/handle/10665/341996/9789240029200-eng.pdf"
+                    >OMS 2021 — Ethics and Governance of AI for Health (PDF)
+                </a>
+
+                <a target="_blank" href="https://iris.who.int/bitstream/handle/10665/375579/9789240084759-eng.pdf"
+                    >OMS 2024 — Guidance on Large Multimodal Models (PDF)
+                </a>
+
+                <a target="_blank" href="https://www.oecd.org/en/topics/ai-principles.html">OCDE — AI Principles (2019, rev. 2024)</a>
+
+                <a target="_blank" href="https://digital-strategy.ec.europa.eu/en/library/ethics-guidelines-trustworthy-ai"
+                    >Comissão Europeia 2019 — Ethics Guidelines for Trustworthy AI
+                </a>
+
+                <br /><br />
+
+                <strong>Referência setorial:</strong>
+
+                <a
+                    target="_blank"
+                    href="https://portal.tcu.gov.br/data/files/42/F7/91/4B/B59019105E366F09E18818A8/Guia%20de%20uso%20de%20IA%20generativa%20no%20TCU.pdf"
+                    >TCU — Guia de Uso de IA Generativa (PDF)
+                </a>
+
+                <a
+                    target="_blank"
+                    href="https://portal.tcu.gov.br/guia-de-uso-de-inteligencia-artificial-generativa-no-tribunal-de-contas-da-uniao-tcu.htm"
+                    >TCU — Página institucional do guia
+                </a>
             </div>
+
+            <style>
+                .footer-ref a {
+                    color: gray;
+                    cursor: pointer;
+                    text-decoration: none;
+                    transition: 500ms;
+                }
+
+                .footer-ref a:hover {
+                    color: black;
+                }
+            </style>
         </div>
 
         <footer class="footer">
@@ -906,13 +978,30 @@
             }
         </style>
         <script>
-            function toggle(block) {
-                var body = block.querySelector(".diretriz-body");
-                var chev = block.querySelector(".chevron");
-                var isOpen = body.classList.contains("open");
-                body.classList.toggle("open", !isOpen);
-                chev.classList.toggle("open", !isOpen);
-            }
+            document.querySelectorAll(".checklist-item").forEach((item) => {
+                item.addEventListener("click", () => {
+                    const circle = item.querySelector(".check-circle");
+
+                    if (circle.innerHTML.trim() === "") {
+                        circle.innerHTML = `
+                    <svg
+                        width="11"
+                        height="11"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#0F6E56"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                `;
+                    } else {
+                        circle.innerHTML = "";
+                    }
+                });
+            });
         </script>
     </body>
 </html>
